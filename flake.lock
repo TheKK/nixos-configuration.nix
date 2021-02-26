@@ -1,0 +1,43 @@
+{
+  "nodes": {
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1611383797,
+        "narHash": "sha256-FIpG2f4+d9UsXCogBTswoPjD/aWZ3dvV5TZjqlL4gyM=",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "a0d8383c422f85f37fccee5af74b1cb4b52287d9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1611910458,
+        "narHash": "sha256-//j54S14v9lp3YKizS1WZW3WKwLjGTzvwhHfUAaRBPQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "6e7f25001fe6874f7ae271891f709bbf50a22c45",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-20.09",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "nixos-hardware": "nixos-hardware",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
