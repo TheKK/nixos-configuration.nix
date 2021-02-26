@@ -1,0 +1,249 @@
+# Wallpaper
+output eDP-1 bg ~/Pictures/wallpapers/DlNfBzgUUAQY4V5-orig.jpg fit
+
+# Mod4 is WinKey
+set $mod Mod4
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below. ISO 10646 = Unicode
+font pango:Electrolize 13
+
+titlebar_padding 3
+
+# start a terminal
+bindsym $mod+Return exec alacritty
+
+# start a new Firefox window
+bindsym $mod+Shift+Return exec firefox -new-window
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start dmenu (a program launcher)
+set $dmenuParams -b -i -l 15 -p '>_' -fn 'Hermit-8'
+
+bindsym $mod+d exec bash --login -c "dmenu_run $dmenuParams"
+bindsym $mod+Shift+d exec bash --login -c "wofi -S run"
+bindsym $mod+Shift+f exec "env > /tmp/env"
+bindsym $mod+Shift+p exec passmenu $dmenuParams
+bindsym $mod+Shift+b exec ~/.config/sway/backlightControll.sh
+bindsym $mod+Shift+m exec ~/.config/sway/monitorLayout.sh
+bindsym $mod+Shift+v exec ~/.config/sway/sound.sh dmenu-set
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# move workspace to another screen
+bindsym $mod+x move workspace to output right
+bindsym $mod+z focus output right
+
+# move focus to other screen
+bindsym $mod+Up focus output up
+bindsym $mod+Left focus output left
+bindsym $mod+Right focus output right
+bindsym $mod+Down focus output down
+
+# split in horizontal orientation
+bindsym $mod+b split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+bindsym $mod+c move position center
+bindsym $mod+Shift+s exec "sleep 1 && xset dpms force off"
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+bindsym $mod+q focus child
+
+# Disable wheel scrolling in tabs
+bindsym button4 nop
+bindsym button5 nop
+
+# workspaces
+set $WS0 0: X
+set $WS1 1: 
+set $WS2 2: 
+set $WS3 3: 
+set $WS4 4: 
+set $WS5 5: 
+set $WS6 6: 
+set $WS7 7: 
+set $WS8 8: 
+set $WS9 9: 
+
+bindsym $mod+0 workspace $WS0
+bindsym $mod+1 workspace $WS1
+bindsym $mod+2 workspace $WS2
+bindsym $mod+3 workspace $WS3
+bindsym $mod+4 workspace $WS4
+bindsym $mod+5 workspace $WS5
+bindsym $mod+6 workspace $WS6
+bindsym $mod+7 workspace $WS7
+bindsym $mod+8 workspace $WS8
+bindsym $mod+9 workspace $WS9
+
+# move focused container to workspace
+bindsym $mod+Shift+0 move container to workspace $WS0
+bindsym $mod+Shift+1 move container to workspace $WS1
+bindsym $mod+Shift+2 move container to workspace $WS2
+bindsym $mod+Shift+3 move container to workspace $WS3
+bindsym $mod+Shift+4 move container to workspace $WS4
+bindsym $mod+Shift+5 move container to workspace $WS5
+bindsym $mod+Shift+6 move container to workspace $WS6
+bindsym $mod+Shift+7 move container to workspace $WS7
+bindsym $mod+Shift+8 move container to workspace $WS8
+bindsym $mod+Shift+9 move container to workspace $WS9
+
+# move firefox console to bigger screen
+workspace "$WS2" output DP1
+workspace "$WS2" output VGA1
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "swaymsg exit"
+
+bindsym $mod+r mode "resize"
+mode "resize" {
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+F2 move scratchpad
+bindsym $mod+F1 scratchpad show
+
+#MY PERSONAL SETTING
+
+# Layout colors           bord      bg    text
+client.focused #1F1F1F #505050 #BBBBBB #4F4F4F
+client.focused_inactive #1A1A1A #1A1A1A #424242 #121212
+client.unfocused #1A1A1A #1A1A1A #4F4F4F #1A1A1A
+client.urgent #1A1A1A #3B89B5 #a5a5a5 #1A1A1A
+client.background #121212
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Workspace related
+default_border normal
+default_floating_border pixel 3
+for_window [floating] border pixel 3
+
+focus_follows_mouse no
+workspace_layout tabbed
+
+# Change border layout
+bindsym $mod+F10 border none
+bindsym $mod+F11 border pixel 1
+bindsym $mod+F12 border normal
+
+#Workspace move
+bindsym $mod+n workspace prev_on_output
+bindsym $mod+m workspace next_on_output
+
+popup_during_fullscreen leave_fullscreen
+workspace_auto_back_and_forth yes
+
+#Sound control
+bindsym XF86AudioRaiseVolume exec ~/.config/sway/sound.sh raise
+bindsym XF86AudioLowerVolume exec ~/.config/sway/sound.sh decrease
+bindsym XF86AudioMute exec ~/.config/sway/sound.sh toggleMute
+bindsym $mod+F9 exec ~/.i3/toggleTouchpad.sh
+bindsym Print exec scrot -e 'mv $f ~/Pictures/screenshots/$f'
+
+#Brightness control
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%- && notify-send "brigh $(light)"
+bindsym XF86MonBrightnessUp exec brightnessctl set +5% && notify-send "brigh $(light)"
+
+#Egg
+bindsym Control+Mod1+k exec "espeak -s 140 -v zh '你怎麽找到我的 這不可能啊 我明明躲得很好'"
+
+#Lockscreen
+bindsym Control+Mod1+l exec ~/.i3/lock.sh
+
+#Rotate screen
+bindsym Control+Mod1+r exec xrandr --output eDP1 --rotate right
+bindsym Control+Mod1+n exec xrandr --output eDP1 --rotate normal
+
+bindsym Control+Mod1+Shift+r exec xrandr --output DP1 --rotate left
+bindsym Control+Mod1+Shift+n exec xrandr --output DP1 --rotate normal
+
+#Suspend system
+bindsym Control+Mod1+s exec i3lock -i ~/Picture/Wallpapers/screenlock.png -p win -u && systemctl suspend
+
+# Laptop screen bar
+bar {
+  output eDP-1
+  position top
+
+  status_command i3status
+
+  icon_theme Adwaita
+
+  colors {
+    background #242C33
+    statusline #FFFFFF
+    separator #808080
+    focused_workspace #444444 #DE5362 #F1F1F1
+    active_workspace #444444 #080808 #797979
+    inactive_workspace #444444 #080808 #CACACA
+    urgent_workspace #444444 #080808 #EA4C59
+  }
+
+  # Disable wheel scrolling in i3 bar
+  bindsym button4 nop
+  bindsym button5 nop
+}
+
+input "type:touchpad" {
+    dwt enabled
+    tap enabled
+    natural_scroll enabled
+    middle_emulation enabled
+    drag_lock enabled
+    pointer_accel 0.2
+}
+
+# Startup applications
+exec fcitx
+exec_always "env > /tmp/env"
+#exec --no-startup-id xset -dpms        #Trun off DPMS
+#exec --no-startup-id xset s off
+#exec --no-startup-id feh --bg-max -z ~/Pictures/wallpapers
+#exec --no-startup-id unclutter
+#exec --no-startup-id dunst
+#exec --no-startup-id ibus-daemon
+#exec --no-startup-id ~/.i3/synapticsCfg.sh
+#exec --no-startup-id ~/.i3/xps13Setup.sh
+#exec --no-startup-id ~/.screenlayout/single_edp_normal.sh

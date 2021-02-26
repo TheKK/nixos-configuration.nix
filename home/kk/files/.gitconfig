@@ -1,0 +1,22 @@
+[user]
+        email = thumbd03803@gmail.com
+        name = Ying-Ruei Liang(KK)
+	signingkey = 97D5962071B77357B4E4C45DB37E75CC529BF418
+[core]
+        autocrlf = false
+
+[alias]
+        lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+        lg = !"git lg1"
+
+[fetch]
+        recurseSubmodules = false
+	prune = true
+[gui]
+	recentrepo = /tmp/bubu
+[commit]
+	gpgsign = true
+[magit]
+	hideCampaign = true
+[cinnabar]
+	helper = /home/kk/Programs/git-cinnabar/git-cinnabar-helper
