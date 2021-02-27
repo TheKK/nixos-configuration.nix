@@ -9,6 +9,8 @@ let
   packages = let
     fonts = with pkgs; [ hermit font-awesome-ttf font-awesome ];
     randomProgram = with pkgs; [
+      usbutils
+      asciinema
       gnupg
       haskellPackages.cabal-install
       haskellPackages.ghc
