@@ -12,7 +12,7 @@
     nixosConfigurations.kks-nixos = nixpkgs.lib.nixosSystem {
        system = "x86_64-linux";
        modules = [
-         ./_configuration.nix
+         ./configuration.nix
          nixos-hardware.nixosModules.dell-xps-13-9343
          ./cachix.nix
          home-manager.nixosModules.home-manager
