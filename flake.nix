@@ -10,18 +10,18 @@
   outputs = { self, nixpkgs, nixos-hardware, home-manager }: {
     # replace 'joes-desktop' with your hostname here.
     nixosConfigurations.kks-nixos = nixpkgs.lib.nixosSystem {
-       system = "x86_64-linux";
-       modules = [
-         ./configuration.nix
-         nixos-hardware.nixosModules.dell-xps-13-9343
-         ./cachix.nix
-         home-manager.nixosModules.home-manager
-         {
-           home-manager.useGlobalPkgs = true;
-           home-manager.useUserPackages = true;
-           home-manager.users.kk = (import ./home/kk) self;
-         }
-       ];
-     };
+      system = "x86_64-linux";
+      modules = [
+        ./configuration.nix
+        nixos-hardware.nixosModules.dell-xps-13-9343
+        ./cachix.nix
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.kk = (import ./home/kk) self;
+        }
+      ];
+    };
   };
 }

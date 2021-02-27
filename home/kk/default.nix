@@ -97,9 +97,7 @@ in {
 
   programs.zsh = {
     enable = true;
-    shellAliases = {
-      gst = "${pkgs.git}/bin/git status";
-    };
+    shellAliases = { gst = "${pkgs.git}/bin/git status"; };
     prezto.enable = true;
     prezto.prompt.theme = "giddie";
     prezto.pmodules = let
@@ -129,17 +127,9 @@ in {
       key = "97D5962071B77357B4E4C45DB37E75CC529BF418";
       signByDefault = true;
     };
-    aliases = {
-      st = "status";
-    };
-    extraConfig = {
-      init = {
-        defaultBranch = "main";
-      };
-    };
-    delta = {
-      enable = true;
-    };
+    aliases = { st = "status"; };
+    extraConfig = { init = { defaultBranch = "main"; }; };
+    delta = { enable = true; };
   };
   programs.password-store = {
     enable = true;

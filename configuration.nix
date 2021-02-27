@@ -5,10 +5,9 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   hardware.bluetooth.powerOnBoot = false;
 
@@ -18,10 +17,8 @@
       experimental-features = nix-command flakes
     '';
 
-    binaryCaches = [
-      "https://nixcache.reflex-frp.org"
-      "https://hydra.iohk.io"
-    ];
+    binaryCaches =
+      [ "https://nixcache.reflex-frp.org" "https://hydra.iohk.io" ];
     binaryCachePublicKeys = [
       "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI="
       "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
@@ -30,10 +27,11 @@
     optimise.automatic = true;
   };
 
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
-    "broadcom-sta" # Wifi firmware.
-    "steam-runtime" # Steam and other games.
-  ];
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (pkgs.lib.getName pkg) [
+      "broadcom-sta" # Wifi firmware.
+      "steam-runtime" # Steam and other games.
+    ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -56,9 +54,7 @@
     defaultLocale = "zh_TW.UTF-8";
     inputMethod = {
       enabled = "fcitx";
-      fcitx = {
-        engines = with pkgs.fcitx-engines; [ rime ];
-      };
+      fcitx = { engines = with pkgs.fcitx-engines; [ rime ]; };
     };
   };
 
@@ -66,16 +62,14 @@
     earlySetup = true;
     font = "ter-i32b";
     keyMap = "us";
-    packages = with pkgs; [
-      terminus_font
-    ];
+    packages = with pkgs; [ terminus_font ];
   };
 
   # Enable the GNOME 3 Desktop Environment.
   services.xserver.enable = true;
   services.xserver.displayManager = {
     gdm.enable = true;
-    hiddenUsers = [];
+    hiddenUsers = [ ];
   };
   services.xserver.desktopManager.gnome3.enable = true;
 
@@ -88,7 +82,7 @@
   hardware.opengl.enable = true;
   hardware.opengl.extraPackages = with pkgs; [ intel-media-driver ];
   hardware.opengl.driSupport32Bit = true;
-  hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [];
+  hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ ];
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
