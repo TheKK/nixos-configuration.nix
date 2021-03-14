@@ -8,12 +8,14 @@ let
 
   packages = let
     fonts = with pkgs; [ hermit font-awesome-ttf font-awesome ];
+    haskellDev = with pkgs; [
+      ghc
+      cabal-install
+    ];
     randomProgram = with pkgs; [
       usbutils
       asciinema
       gnupg
-      haskellPackages.cabal-install
-      haskell.compiler.ghc8104
       binutils
       ghostscript
       gcc
@@ -64,6 +66,7 @@ let
     nixProgram
     networkPrograms
     archivePrograms
+    haskellDev
   ];
 
 in {
