@@ -13,7 +13,7 @@ let
       asciinema
       gnupg
       haskellPackages.cabal-install
-      haskellPackages.ghc
+      haskell.compiler.ghc8104
       binutils
       ghostscript
       gcc
