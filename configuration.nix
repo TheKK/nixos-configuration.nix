@@ -14,6 +14,7 @@
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = ''
+      keep-outputs = true
       experimental-features = nix-command flakes
     '';
 

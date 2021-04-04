@@ -55,6 +55,7 @@ let
       wf-recorder
       wget
       xwayland
+      tokei
     ];
     nixProgram = with pkgs; [ nixfmt nix-tree nix-du ];
     networkPrograms = with pkgs; [ mtr ];
