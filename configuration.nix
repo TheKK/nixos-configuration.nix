@@ -27,8 +27,6 @@
 
     maxJobs = 2;
     buildCores = 2;
-
-    optimise.automatic = true;
   };
 
   nixpkgs.config.allowUnfreePredicate = pkg:
