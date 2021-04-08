@@ -1,4 +1,4 @@
-self:
+{ self, nixpkgs-unstable, ... }:
 { config, pkgs, ... }:
 
 let
