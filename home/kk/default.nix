@@ -60,7 +60,6 @@ let
     nixProgram = with pkgs; [ nixfmt nix-tree nix-du ];
     networkPrograms = with pkgs; [ mtr ];
     archivePrograms = with pkgs; [ unzip unar ];
-    alacrittyWithFonts = with pkgs; [ alacritty hermit ];
   in builtins.concatLists [
     fonts
     randomProgram
@@ -115,8 +114,6 @@ in {
       ];
     in defs ++ [ "archive" "history-substring-search" ];
   };
-
-  programs.alacritty.enable = true;
 
   programs.firefox.enable = true;
   programs.chromium.enable = true;
