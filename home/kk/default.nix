@@ -4,8 +4,6 @@
 let
   fileDir = "${self}/home/kk/files";
 
-  homeAttrs = { inherit fileDir; };
-
   packages = let
     fonts = with pkgs; [ hermit font-awesome-ttf font-awesome ];
     haskellDev = with pkgs; [ ghc cabal-install ];
@@ -67,7 +65,8 @@ let
   ];
 
 in {
-  imports = [ (import ./home/sway.nix homeAttrs) ];
+  imports = let homeAttrs = { inherit fileDir nixpkgs-unstable; };
+  in [ (import ./home/sway.nix homeAttrs) ];
 
   manual.html.enable = true;
 
