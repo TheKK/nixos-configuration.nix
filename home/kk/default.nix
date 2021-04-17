@@ -2,6 +2,7 @@
 { config, pkgs, ... }:
 
 let
+  pkgs-unstable = nixpkgs-unstable;
   fileDir = "${self}/home/kk/files";
 
   packages = let
@@ -52,7 +53,7 @@ let
       xwayland
       tokei
     ];
-    nixProgram = with pkgs; [ nixfmt nix-tree nix-du ];
+    nixProgram = with pkgs-unstable; [ nixpkgs-fmt nix-tree nix-du ];
     networkPrograms = with pkgs; [ mtr ];
     archivePrograms = with pkgs; [ unzip unar ];
   in builtins.concatLists [
