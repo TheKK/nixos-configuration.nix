@@ -37,7 +37,7 @@
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 5;
+  boot.loader.systemd-boot.configurationLimit = 10;
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.cleanTmpDir = true;
@@ -105,7 +105,6 @@
   environment.systemPackages = with pkgs; [
     vim
     firefox
-    dash
     vulkan-tools
     vulkan-loader
   ];
@@ -137,7 +136,10 @@
     };
   };
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = false;
+  };
 
   fonts.fonts = with pkgs; [
     noto-fonts
