@@ -7,8 +7,12 @@ let
 
   packages = let
     fonts = with pkgs; [ hermit font-awesome-ttf font-awesome ];
-    haskellDev = with pkgs; [ ghc cabal-install ];
+    haskellDev = with pkgs; [ ghc cabal-install ghcid ];
     randomProgram = with pkgs; [
+      zlib
+      cmatrix
+      sl
+      nmap
       usbutils
       asciinema
       gnupg
