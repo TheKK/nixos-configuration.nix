@@ -9,6 +9,10 @@ let
     fonts = with pkgs; [ hermit font-awesome-ttf font-awesome ];
     haskellDev = with pkgs; [ ghc cabal-install ghcid ];
     randomProgram = with pkgs; [
+      openssl
+      zip
+      gnome3.networkmanagerapplet
+      openfortivpn
       zlib
       cmatrix
       sl
@@ -19,7 +23,7 @@ let
       binutils
       ghostscript
       gcc
-      gdb
+      nixpkgs-unstable.gdb
       cgdb
       graphviz
       cachix
@@ -60,6 +64,7 @@ let
     nixProgram = with pkgs-unstable; [ nixpkgs-fmt nix-tree nix-du ];
     networkPrograms = with pkgs; [ mtr ];
     archivePrograms = with pkgs; [ unzip unar ];
+    graphicalPrograms = with pkgs; [ gimp ];
   in builtins.concatLists [
     fonts
     randomProgram
@@ -67,6 +72,7 @@ let
     networkPrograms
     archivePrograms
     haskellDev
+    graphicalPrograms
   ];
 
 in {

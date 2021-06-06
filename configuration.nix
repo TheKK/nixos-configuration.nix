@@ -1,6 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
+{ workaround }:
 
 { config, pkgs, ... }:
 
@@ -12,10 +13,10 @@
   hardware.bluetooth.powerOnBoot = false;
 
   nix = {
-    package = pkgs.nixFlakes;
+    package = workaround.nixUnstable;
     extraOptions = ''
       keep-outputs = true
-      experimental-features = nix-command flakes
+      experimental-features = nix-command flakes ca-references
     '';
 
     binaryCaches =
@@ -51,6 +52,10 @@
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking.useDHCP = false;
+
+  networking.networkmanager.packages = with pkgs; [
+    networkmanager-fortisslvpn
+  ];
 
   # Select internationalisation properties.
   i18n = {
@@ -107,6 +112,7 @@
     firefox
     vulkan-tools
     vulkan-loader
+    gnome3.gnome-tweak-tool
   ];
 
   # This value determines the NixOS release from which the default
