@@ -9,13 +9,14 @@ let
     fonts = with pkgs; [ hermit font-awesome-ttf font-awesome ];
     haskellDev = with pkgs; [ ghc cabal-install ghcid ];
     randomProgram = with pkgs; [
+      blueberry
+      tmux
+      cifs-utils
       openssl
       zip
       gnome3.networkmanagerapplet
       openfortivpn
       zlib
-      cmatrix
-      sl
       nmap
       usbutils
       asciinema
@@ -53,9 +54,7 @@ let
       slurp
       tig
       time
-      toilet
       tree
-      watchexec
       wf-recorder
       wget
       xwayland
@@ -96,7 +95,9 @@ in {
   # changes in each release.
   home.stateVersion = "21.03";
 
-  systemd.user.sessionVariables = { MOZ_ENABLE_WAYLAND = 1; };
+  systemd.user.sessionVariables = {
+    MOZ_ENABLE_WAYLAND = 1;
+  };
 
   home.packages = packages;
 
