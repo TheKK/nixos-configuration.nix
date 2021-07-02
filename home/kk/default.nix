@@ -9,6 +9,9 @@ let
     fonts = with pkgs; [ hermit font-awesome-ttf font-awesome ];
     haskellDev = with pkgs; [ ghc cabal-install ghcid ];
     randomProgram = with pkgs; [
+      nixpkgs-unstable.yarn
+      nixpkgs-unstable.nodejs
+      buildah
       blueberry
       tmux
       cifs-utils

@@ -95,13 +95,21 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
 
+  xdg = {
+    portal.enable = true;
+    portal.extraPortals = with pkgs; [
+      xdg-desktop-portal-wlr
+    ];
+    gtkUsePortal = true;
+  };
+
   users.defaultUserShell = pkgs.bash;
 
   users.users = {
     kk = {
       description = "The programer";
       isNormalUser = true;
-      extraGroups = [ "wheel" "networkmanager" ];
+      extraGroups = [ "wheel" "networkmanager" "docker" ];
     };
   };
 

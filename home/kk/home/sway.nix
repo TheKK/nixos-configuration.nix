@@ -11,6 +11,7 @@ in {
     swaylock
     swayidle
     wl-clipboard
+    wdisplays
     mako
     wofi
   ];
