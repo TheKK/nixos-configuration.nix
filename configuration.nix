@@ -97,10 +97,10 @@
 
   xdg = {
     portal.enable = true;
+    portal.gtkUsePortal = true;
     portal.extraPortals = with pkgs; [
       xdg-desktop-portal-wlr
     ];
-    gtkUsePortal = true;
   };
 
   users.defaultUserShell = pkgs.bash;
