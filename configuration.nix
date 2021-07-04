@@ -43,6 +43,9 @@
 
   boot.cleanTmpDir = true;
 
+  # We don't need to wait online.
+  systemd.services.NetworkManager-wait-online.enable = false;
+
   networking.hostName = "kks-nixos"; # Define your hostname.
 
   # Set your time zone.
@@ -54,7 +57,6 @@
   networking.useDHCP = false;
 
   networking.networkmanager.packages = with pkgs; [
-    networkmanager-fortisslvpn
   ];
 
   # Select internationalisation properties.
