@@ -11,7 +11,6 @@ let
     randomProgram = with pkgs; [
       nixpkgs-unstable.yarn
       nixpkgs-unstable.nodejs
-      buildah
       blueberry
       tmux
       cifs-utils
