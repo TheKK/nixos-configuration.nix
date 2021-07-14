@@ -38,7 +38,7 @@
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 10;
+  boot.loader.systemd-boot.configurationLimit = 5;
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.cleanTmpDir = true;
@@ -98,10 +98,10 @@
   services.xserver.libinput.enable = true;
 
   xdg = {
-    portal.enable = true;
-    portal.gtkUsePortal = true;
+    # portal.enable = true;
+    # portal.gtkUsePortal = false;
     portal.extraPortals = with pkgs; [
-      xdg-desktop-portal-wlr
+      # xdg-desktop-portal-wlr
     ];
   };
 
