@@ -9,6 +9,10 @@ let
     fonts = with pkgs; [ hermit font-awesome-ttf font-awesome ];
     haskellDev = with pkgs; [ ghc cabal-install ghcid ];
     randomProgram = with pkgs; [
+      python
+      iperf
+      obs-studio
+      go
       nixpkgs-unstable.yarn
       nixpkgs-unstable.nodejs
       blueberry

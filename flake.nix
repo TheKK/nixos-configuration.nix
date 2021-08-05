@@ -18,7 +18,7 @@
           nixpkgs.overlays = [
             (final: prev: {
               # We want version ^1.2.3 to cache inputs of nix flake.
-              nix-direnv = nixpkgs-unstable.legacyPackages.${system}.nix-direnv;
+              nix-direnv = nixpkgs-unstable.legacyPackages.${system}.nix-direnv.override { enableFlakes = true; };
               nixpkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
             })
           ];
