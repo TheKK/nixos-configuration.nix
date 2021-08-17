@@ -32,5 +32,5 @@
     [ { device = "/dev/disk/by-uuid/2409e2ab-e6a4-496e-8ae8-7bc09c8d31c1"; }
     ];
 
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  # powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 }

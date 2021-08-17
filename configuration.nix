@@ -81,7 +81,7 @@
     gdm.enable = true;
     hiddenUsers = [ ];
   };
-  services.xserver.desktopManager.gnome3.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
 
   # Enable sound.
   sound.enable = true;
