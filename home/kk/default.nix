@@ -9,6 +9,7 @@ let
     fonts = with pkgs; [ hermit font-awesome-ttf font-awesome ];
     haskellDev = with pkgs; [ ghc cabal-install ghcid ];
     randomProgram = with pkgs; [
+      olive-editor
       p7zip
       cpufrequtils
       python
@@ -159,7 +160,7 @@ in {
 
   programs.direnv = {
     enable = true;
-    enableNixDirenvIntegration = true;
+    nix-direnv.enable = true;
   };
 
   services.gpg-agent = {
