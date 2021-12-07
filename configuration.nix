@@ -1,8 +1,6 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ workaround }:
-
 { config, pkgs, ... }:
 
 {
@@ -13,7 +11,7 @@
   hardware.bluetooth.powerOnBoot = false;
 
   nix = {
-    package = workaround.nixUnstable;
+    package = pkgs.nixFlakes;
     extraOptions = ''
       keep-outputs = true
       experimental-features = nix-command flakes ca-references

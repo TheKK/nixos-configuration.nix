@@ -1,8 +1,8 @@
-{ self, nixpkgs-unstable, ... }:
+{ self, ... }:
 { config, pkgs, ... }:
 
 let
-  pkgs-unstable = nixpkgs-unstable;
+  inherit (pkgs) nixpkgs-unstable;
   fileDir = "${self}/home/kk/files";
 
   packages = let
@@ -69,7 +69,7 @@ let
       xwayland
       tokei
     ];
-    nixProgram = with pkgs-unstable; [ nixpkgs-fmt nix-tree nix-du ];
+    nixProgram = with nixpkgs-unstable; [ nixpkgs-fmt nix-tree nix-du ];
     networkPrograms = with pkgs; [ mtr ];
     archivePrograms = with pkgs; [ unzip unar ];
     graphicalPrograms = with pkgs; [ gimp ];

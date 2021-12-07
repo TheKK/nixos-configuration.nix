@@ -17,15 +17,12 @@
         ({ ... }: {
           nixpkgs.overlays = [
             (final: prev: {
-              # We want version ^1.2.3 to cache inputs of nix flake.
-              nix-direnv = nixpkgs-unstable.legacyPackages.${system}.nix-direnv.override { enableFlakes = true; };
               nixpkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
+              nix-direnv = final.nixpkgs-unstable.nix-direnv.override { enableFlakes = true; };
             })
           ];
         })
-        (import ./configuration.nix {
-          workaround = workaround.legacyPackages.${system};
-        })
+        ./configuration.nix
         nixos-hardware.nixosModules.dell-xps-13-9343
         ./cachix.nix
         home-manager.nixosModules.home-manager
