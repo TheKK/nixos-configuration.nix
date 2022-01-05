@@ -81,6 +81,8 @@
   };
   services.xserver.desktopManager.gnome.enable = true;
 
+  # services.gvfs.enable = true;
+
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;

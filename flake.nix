@@ -25,6 +25,7 @@
         ./configuration.nix
         nixos-hardware.nixosModules.dell-xps-13-9343
         ./cachix.nix
+        ./workaround-configuration.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
