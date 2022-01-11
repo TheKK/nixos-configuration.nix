@@ -17,7 +17,6 @@
           nixpkgs.overlays = [
             (final: prev: {
               nixpkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
-              nix-direnv = final.nixpkgs-unstable.nix-direnv.override { enableFlakes = true; };
             })
           ];
         })
