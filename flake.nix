@@ -31,7 +31,6 @@
           home-manager.useUserPackages = true;
           home-manager.users.kk = (import ./home/kk) {
             inherit self;
-            nixpkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
           };
         }
       ];

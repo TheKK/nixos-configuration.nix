@@ -2,7 +2,6 @@
 { config, pkgs, ... }:
 
 let
-  inherit (pkgs) nixpkgs-unstable;
   fileDir = "${self}/home/kk/files";
 
   packages = let
@@ -17,8 +16,8 @@ let
       iperf
       obs-studio
       go
-      nixpkgs-unstable.yarn
-      nixpkgs-unstable.nodejs
+      yarn
+      nodejs
       blueberry
       tmux
       cifs-utils
@@ -34,7 +33,7 @@ let
       binutils
       ghostscript
       gcc
-      nixpkgs-unstable.gdb
+      gdb
       cgdb
       graphviz
       cachix
@@ -70,7 +69,7 @@ let
       xwayland
       tokei
     ];
-    nixProgram = with nixpkgs-unstable; [ nixpkgs-fmt nix-tree nix-du ];
+    nixProgram = with pkgs; [ nixpkgs-fmt nix-tree nix-du ];
     networkPrograms = with pkgs; [ mtr ];
     archivePrograms = with pkgs; [ unzip unar ];
     graphicalPrograms = with pkgs; [ gimp ];
@@ -85,7 +84,7 @@ let
   ];
 
 in {
-  imports = let homeAttrs = { inherit fileDir nixpkgs-unstable; };
+  imports = let homeAttrs = { inherit fileDir; };
   in [ (import ./home/sway.nix homeAttrs) ];
 
   manual.html.enable = true;
