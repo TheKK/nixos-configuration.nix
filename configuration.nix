@@ -30,6 +30,7 @@
 
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (pkgs.lib.getName pkg) [
+      "broadcom-bt-firmware" # Bluetooth firmware.
       "broadcom-sta" # Wifi firmware.
       "steam-runtime" # Steam and other games.
     ];
@@ -38,6 +39,19 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 5;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  boot = {
+    # TODO Workaround to apply modprobe config to hid-apple since it's inside
+    # initrd. Without kernelModules, following options have no effect.
+    kernelModules = [ "hid-apple" ];
+    extraModprobeConfig = ''
+      options hid_apple fnmode=0
+    '';
+  };
+
+  hardware.firmware = with pkgs; [
+    broadcom-bt-firmware
+  ];
 
   boot.cleanTmpDir = true;
 
