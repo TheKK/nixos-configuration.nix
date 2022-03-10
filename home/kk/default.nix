@@ -6,8 +6,12 @@ let
 
   packages = let
     fonts = with pkgs; [ hermit font-awesome-ttf font-awesome ];
-    haskellDev = with pkgs; [ ghc cabal-install ghcid ];
+    haskellDev = with pkgs; [ ghc cabal-install ghcid haskell-language-server ];
     randomProgram = with pkgs; [
+      llvm_13
+      nfs-utils
+      dnsutils
+      smartmontools
       kdenlive
       olive-editor
       p7zip
@@ -18,7 +22,6 @@ let
       go
       yarn
       nodejs
-      blueberry
       tmux
       cifs-utils
       openssl
@@ -31,7 +34,6 @@ let
       asciinema
       gnupg
       binutils
-      ghostscript
       gcc
       gdb
       cgdb
