@@ -237,6 +237,8 @@ input "type:touchpad" {
 
 # Startup applications
 exec fcitx
+# Make xdg-desktop-portal.service works.
+exec systemctl --user import-environment
 exec_always "env > /tmp/env"
 #exec --no-startup-id xset -dpms        #Trun off DPMS
 #exec --no-startup-id xset s off
