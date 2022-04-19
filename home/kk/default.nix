@@ -6,9 +6,10 @@ let
 
   packages = let
     fonts = with pkgs; [ hermit font-awesome-ttf font-awesome ];
-    haskellDev = with pkgs; [ ghc cabal-install ghcid haskell-language-server ];
+    haskellDev = with pkgs.nixpkgs-unstable; [ ghc cabal-install ghcid haskell-language-server ];
     randomProgram = with pkgs; [
-      llvm_13
+      ghostscript
+      llvm_12
       nfs-utils
       dnsutils
       smartmontools
