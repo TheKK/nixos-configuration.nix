@@ -5,16 +5,17 @@ let
   fileDir = "${self}/home/kk/files";
 
   packages = let
-    fonts = with pkgs; [ hermit font-awesome-ttf font-awesome ];
+    fonts = with pkgs; [ hermit font-awesome ];
     haskellDev = with pkgs.nixpkgs-unstable; [ ghc cabal-install ghcid haskell-language-server ];
     randomProgram = with pkgs; [
+      powertop
+      chez
       ghostscript
       llvm_12
       nfs-utils
       dnsutils
       smartmontools
       kdenlive
-      olive-editor
       p7zip
       cpufrequtils
       python
@@ -27,7 +28,7 @@ let
       cifs-utils
       openssl
       zip
-      gnome3.networkmanagerapplet
+      networkmanagerapplet
       openfortivpn
       zlib
       nmap
@@ -46,7 +47,7 @@ let
       pstree
       jq
       file
-      steam-run-native
+      steam-run
       bat
       brightnessctl
       cowsay
@@ -151,7 +152,7 @@ in {
   };
   programs.password-store = {
     enable = true;
-    package = pkgs.pass-otp;
+    package = pkgs.pass.withExtensions (exts: [ exts.pass-otp ]);
     settings = { PASSWORD_STORE_DIR = "$HOME/.password-store"; };
   };
   programs.mpv.enable = true;
@@ -165,7 +166,6 @@ in {
     enable = true;
     nix-direnv = {
       enable = true;
-      enableFlakes = true;
     };
   };
 

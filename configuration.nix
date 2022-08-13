@@ -14,7 +14,7 @@
     package = pkgs.nixFlakes;
     extraOptions = ''
       keep-outputs = true
-      experimental-features = nix-command flakes ca-references
+      experimental-features = nix-command flakes
     '';
 
     binaryCaches =
@@ -33,6 +33,7 @@
       "broadcom-bt-firmware" # Bluetooth firmware.
       "broadcom-sta" # Wifi firmware.
       "steam-runtime" # Steam and other games.
+      "steam-original"
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -67,9 +68,6 @@
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking.useDHCP = false;
-
-  networking.networkmanager.packages = with pkgs; [
-  ];
 
   # Select internationalisation properties.
   i18n = {
@@ -136,7 +134,6 @@
     firefox
     vulkan-tools
     vulkan-loader
-    gnome3.gnome-tweak-tool
   ];
 
   # This value determines the NixOS release from which the default
@@ -178,7 +175,7 @@
     liberation_ttf
     fira-code
     fira-code-symbols
-    mplus-outline-fonts
+    mplus-outline-fonts.githubRelease
     dina-font
     proggyfonts
   ];
