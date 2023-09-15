@@ -34,6 +34,7 @@
       "broadcom-sta" # Wifi firmware.
       "steam-runtime" # Steam and other games.
       "steam-original"
+      "steam-run"
     ];
 
   # Use the systemd-boot EFI boot loader.

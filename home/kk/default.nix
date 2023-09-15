@@ -8,6 +8,8 @@ let
     fonts = with pkgs; [ hermit font-awesome ];
     haskellDev = with pkgs.nixpkgs-unstable; [ ghc cabal-install ghcid haskell-language-server ];
     randomProgram = with pkgs; [
+      haskellPackages.threadscope
+      libreoffice
       powertop
       chez
       ghostscript
