@@ -6,26 +6,17 @@ let
 
   packages = let
     fonts = with pkgs; [ hermit font-awesome ];
-    haskellDev = with pkgs.nixpkgs-unstable; [ ghc cabal-install ghcid haskell-language-server ];
+    haskellDev = with pkgs.nixpkgs-unstable; [ ghc cabal-install ];
     randomProgram = with pkgs; [
-      haskellPackages.threadscope
       libreoffice
       powertop
-      chez
-      ghostscript
-      llvm_12
       nfs-utils
       dnsutils
       smartmontools
       kdenlive
       p7zip
       cpufrequtils
-      python
       iperf
-      obs-studio
-      go
-      yarn
-      nodejs
       tmux
       cifs-utils
       openssl
@@ -44,21 +35,17 @@ let
       graphviz
       cachix
       notify-desktop
-      neovim
       htop
       pstree
       jq
       file
       steam-run
-      bat
       brightnessctl
-      cowsay
       curl
       emacs
       fd
       feh
       ffmpeg
-      fortune
       grim
       hdparm
       ncdu
@@ -120,7 +107,6 @@ in {
 
   programs.zsh = {
     enable = true;
-    shellAliases = { gst = "${pkgs.git}/bin/git status"; };
     prezto.enable = true;
     prezto.prompt.theme = "giddie";
     prezto.pmodules = let
@@ -148,8 +134,15 @@ in {
       key = "97D5962071B77357B4E4C45DB37E75CC529BF418";
       signByDefault = true;
     };
-    aliases = { st = "status"; };
-    extraConfig = { init = { defaultBranch = "main"; }; };
+    aliases = {
+      st = "status";
+    };
+    extraConfig = {
+      init = { defaultBranch = "main"; };
+      core = {
+        editor = "${pkgs.neovim}/bin/nvim";
+      };
+    };
     delta = { enable = true; };
   };
   programs.password-store = {
@@ -159,9 +152,9 @@ in {
   };
   programs.mpv.enable = true;
 
-  programs.mako = {
+  services.mako = {
     enable = true;
-    defaultTimeout = 2000;
+    defaultTimeout = 1500;
   };
 
   programs.direnv = {
@@ -169,6 +162,13 @@ in {
     nix-direnv = {
       enable = true;
     };
+  };
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
   };
 
   services.gpg-agent = {

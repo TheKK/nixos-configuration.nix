@@ -17,15 +17,16 @@
       experimental-features = nix-command flakes
     '';
 
-    binaryCaches =
-      [ "https://nixcache.reflex-frp.org" "https://hydra.iohk.io" ];
-    binaryCachePublicKeys = [
-      "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI="
-      "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
-    ];
-
-    maxJobs = 2;
-    buildCores = 2;
+    settings = {
+      max-jobs = 2;
+      cores = 2;
+      substituters = [
+        "https://nixcache.reflex-frp.org"
+      ];
+      trusted-public-keys = [
+        "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI="
+      ];
+    };
   };
 
   nixpkgs.config.allowUnfreePredicate = pkg:
@@ -74,8 +75,8 @@
   i18n = {
     defaultLocale = "zh_TW.UTF-8";
     inputMethod = {
-      enabled = "fcitx";
-      fcitx = { engines = with pkgs.fcitx-engines; [ rime ]; };
+      enabled = "fcitx5";
+      fcitx5.addons = with pkgs; [ fcitx5-rime ];
     };
   };
 
