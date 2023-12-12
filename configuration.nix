@@ -56,7 +56,7 @@
     broadcom-bt-firmware
   ];
 
-  boot.cleanTmpDir = true;
+  boot.tmp.cleanOnBoot = true;
 
   # We don't need to wait online.
   systemd.services.NetworkManager-wait-online.enable = false;
@@ -182,7 +182,7 @@
     enableOnBoot = false;
   };
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji

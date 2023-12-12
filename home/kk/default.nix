@@ -135,7 +135,7 @@ in {
       signByDefault = true;
     };
     aliases = {
-      st = "status";
+      gst = "status";
     };
     extraConfig = {
       init = { defaultBranch = "main"; };
