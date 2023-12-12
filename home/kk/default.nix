@@ -122,6 +122,8 @@ in {
         "prompt"
       ];
     in defs ++ [ "archive" "history-substring-search" ];
+
+    shellAliases = { gst = "${pkgs.git}/bin/git status"; };
   };
 
   programs.firefox.enable = true;
@@ -135,7 +137,6 @@ in {
       signByDefault = true;
     };
     aliases = {
-      gst = "status";
     };
     extraConfig = {
       init = { defaultBranch = "main"; };
