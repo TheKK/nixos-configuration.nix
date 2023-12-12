@@ -76,7 +76,11 @@
     defaultLocale = "zh_TW.UTF-8";
     inputMethod = {
       enabled = "fcitx5";
-      fcitx5.addons = with pkgs; [ fcitx5-rime ];
+      fcitx5.addons = with pkgs; [
+        fcitx5-gtk
+	libsForQt5.fcitx5-qt
+	fcitx5-rime
+      ];
     };
   };
 
@@ -162,6 +166,14 @@
         alacritty # Alacritty is the default terminal in the config
         dmenu # Dmenu is the default in the config but i recommend wofi since its wayland native
       ];
+      extraSessionCommands = ''
+        fcitx5 -d
+        export INPUT_METHOD=fcitx
+        export QT_IM_MODULE=fcitx
+        export GTK_IM_MODULE=fcitx
+        export XMODIFIERS=@im=fcitx
+        export XIM_SERVERS=fcitx
+      '';
     };
   };
 
