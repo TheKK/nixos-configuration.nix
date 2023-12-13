@@ -175,6 +175,10 @@
         export XIM_SERVERS=fcitx
       '';
     };
+
+    hyprland = {
+      enable = true;
+    };
   };
 
   virtualisation.docker = {

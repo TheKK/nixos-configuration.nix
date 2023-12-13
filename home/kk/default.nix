@@ -77,8 +77,12 @@ let
   ];
 
 in {
-  imports = let homeAttrs = { inherit fileDir; };
-  in [ (import ./home/sway.nix homeAttrs) ];
+  imports =
+    let homeAttrs = { inherit fileDir; };
+    in [
+      (import ./home/sway.nix homeAttrs)
+      (import ./hyprland.nix)
+    ];
 
   manual.html.enable = true;
 
@@ -102,6 +106,20 @@ in {
   };
 
   home.packages = packages;
+
+  wayland.windowManager.hyprland = {
+    enable = true;
+    extraConfig = ''
+    '';
+  };
+
+  programs.rofi = {
+    enable = true;
+    pass = {
+      enable = true;
+      package = pkgs.rofi-pass-wayland;
+    };
+  };
 
   programs.pazi.enable = true;
 
@@ -148,7 +166,7 @@ in {
   };
   programs.password-store = {
     enable = true;
-    package = pkgs.pass.withExtensions (exts: [ exts.pass-otp ]);
+    package = pkgs.pass-wayland.withExtensions (exts: [ exts.pass-otp ]);
     settings = { PASSWORD_STORE_DIR = "$HOME/.password-store"; };
   };
   programs.mpv.enable = true;
