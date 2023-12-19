@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 let
   hyptland_config = {
@@ -6,6 +6,12 @@ let
       # This is an example Hyprland config file.
       #
       # Refer to the wiki for more information.
+
+      # Tools: ${pkgs.hyprshade}
+      # Tools: ${pkgs.hyprpicker}
+      # Tools: ${pkgs.eww-wayland}
+
+      exec-once=${pkgs.hyprpaper}/bin/hyprpaper
       
       #
       # Please note not all available settings / options are set here.
@@ -13,8 +19,7 @@ let
       #
       
       # See https://wiki.hyprland.org/Configuring/Monitors/
-      monitor=,preferred,auto,auto
-      
+      monitor=,preferred,auto,1
       
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
       
@@ -39,10 +44,10 @@ let
           kb_options =
           kb_rules =
       
-          follow_mouse = 1
+          follow_mouse = 0
       
           touchpad {
-              natural_scroll = false
+              natural_scroll = true
           }
       
           sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
@@ -51,9 +56,9 @@ let
       general {
           # See https://wiki.hyprland.org/Configuring/Variables/ for more
       
-          gaps_in = 5
-          gaps_out = 20
-          border_size = 2
+          gaps_in = 10
+          gaps_out = 15
+          border_size = 1
           col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
           col.inactive_border = rgba(595959aa)
       
@@ -66,12 +71,12 @@ let
       decoration {
           # See https://wiki.hyprland.org/Configuring/Variables/ for more
       
-          rounding = 10
+          rounding = 3
       
           blur {
               enabled = true
-              size = 3
-              passes = 1
+              size = 2
+              passes = 2
               
               vibrancy = 0.1696
           }
@@ -110,7 +115,7 @@ let
       
       gestures {
           # See https://wiki.hyprland.org/Configuring/Variables/ for more
-          workspace_swipe = false
+          workspace_swipe = true
       }
       
       misc {
@@ -133,10 +138,11 @@ let
       
       
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
-      $mainMod = SUPER
+      $mainMod = CTRL
       
       # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-      bind = $mainMod, enter, exec, $terminal
+      bind = $mainMod SHIFT, ENTER, exec, $terminal
+      bind = $mainMod SHIFT, o, exec, $terminal
       bind = $mainMod SHIFT, Q, killactive,
       bind = $mainMod SHIFT, E, exit,
       bind = $mainMod, V, togglefloating,

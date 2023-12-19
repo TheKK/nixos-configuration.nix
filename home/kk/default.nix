@@ -5,7 +5,7 @@ let
   fileDir = "${self}/home/kk/files";
 
   packages = let
-    fonts = with pkgs; [ hermit font-awesome ];
+    fonts = with pkgs; [ hermit font-awesome nerdfonts ];
     haskellDev = with pkgs.nixpkgs-unstable; [ ghc cabal-install ];
     randomProgram = with pkgs; [
       libreoffice
