@@ -8,6 +8,7 @@ let
     fonts = with pkgs; [ hermit font-awesome nerdfonts ];
     haskellDev = with pkgs.nixpkgs-unstable; [ ghc cabal-install ];
     randomProgram = with pkgs; [
+      dmidecode
       libreoffice
       powertop
       nfs-utils
@@ -125,23 +126,21 @@ in {
 
   programs.zsh = {
     enable = true;
-    prezto.enable = true;
-    prezto.prompt.theme = "giddie";
-    prezto.pmodules = let
-      defs = [
-        "environment"
-        "terminal"
-        "editor"
-        "history"
-        "directory"
-        "spectrum"
-        "utility"
-        "completion"
-        "prompt"
-      ];
-    in defs ++ [ "archive" "history-substring-search" ];
-
     shellAliases = { gst = "${pkgs.git}/bin/git status"; };
+    initExtra = ''
+      bindkey "^P" up-line-or-history;
+      bindkey "^N" down-line-or-history;
+    '';
+    antidote = {
+      enable = true;
+      plugins = [
+        "sindresorhus/pure"
+        "zsh-users/zsh-syntax-highlighting"
+        "zsh-users/zsh-autosuggestions"
+        "zsh-users/zsh-history-substring-search"
+        "zdharma/history-search-multi-word"
+      ];
+    };
   };
 
   programs.firefox.enable = true;
