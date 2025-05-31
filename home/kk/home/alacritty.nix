@@ -7,6 +7,6 @@ in {
   programs.alacritty.enable = true;
   home.packages = with pkgs; [ hermit ];
   xdg.configFile = {
-    "alacritty/alacritty.yml" = { source = "${fileDir}/.alacritty.yml"; };
+    "alacritty/alacritty.yml" = { source = "${fileDir}/alacritty.yml"; };
   };
 }
