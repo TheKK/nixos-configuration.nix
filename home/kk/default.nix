@@ -5,16 +5,17 @@ let
   fileDir = "${self}/home/kk/files";
 
   packages = let
-    fonts = with pkgs; [ hermit font-awesome nerdfonts ];
-    haskellDev = with pkgs.nixpkgs-unstable; [ ghc cabal-install ];
+    fonts = with pkgs; [ hermit font-awesome 
+      # nerd-fonts.ubuntu
+    ];
+    haskellDev = with pkgs.nixpkgs-unstable; [ ];
     randomProgram = with pkgs; [
       dmidecode
-      libreoffice
       powertop
       nfs-utils
       dnsutils
       smartmontools
-      kdenlive
+      kdePackages.kdenlive
       p7zip
       cpufrequtils
       iperf
@@ -30,9 +31,6 @@ let
       asciinema
       gnupg
       binutils
-      gcc
-      gdb
-      cgdb
       graphviz
       cachix
       notify-desktop
@@ -192,7 +190,7 @@ in {
   services.gpg-agent = {
     enable = true;
     defaultCacheTtl = 150;
-    pinentryFlavor = "qt";
+    pinentryPackage = pkgs.pinentry-qt;
   };
 
   services.syncthing = { enable = true; };

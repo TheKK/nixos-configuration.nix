@@ -11,7 +11,7 @@
   hardware.bluetooth.powerOnBoot = false;
 
   nix = {
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.stable;
     extraOptions = ''
       keep-outputs = true
       experimental-features = nix-command flakes
@@ -36,6 +36,7 @@
       "steam-runtime" # Steam and other games.
       "steam-original"
       "steam-run"
+      "steam-unwrapped"
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -98,13 +99,13 @@
     hiddenUsers = [ ];
   };
   services.xserver.desktopManager.gnome.enable = true;
+  services.gnome.gnome-remote-desktop.enable = true;
 
   # services.gvfs.enable = true;
 
   # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-  hardware.pulseaudio.support32Bit = true;
+  # hardware.pulseaudio.enable = true;
+  # hardware.pulseaudio.support32Bit = true;
 
   # Enable graphical stuff
   hardware.opengl.enable = true;
@@ -116,11 +117,7 @@
   services.xserver.libinput.enable = true;
 
   xdg = {
-    # portal.enable = true;
-    # portal.gtkUsePortal = false;
-    portal.extraPortals = with pkgs; [
-      # xdg-desktop-portal-wlr
-    ];
+    portal.enable = true;
   };
 
   users.defaultUserShell = pkgs.bash;
@@ -188,7 +185,7 @@
 
   fonts.packages = with pkgs; [
     noto-fonts
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
     noto-fonts-emoji
     liberation_ttf
     fira-code

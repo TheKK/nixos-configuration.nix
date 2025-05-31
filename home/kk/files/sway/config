@@ -1,5 +1,6 @@
 # Wallpaper
-output eDP-1 bg ~/Pictures/wallpapers/DlNfBzgUUAQY4V5-orig.jpg fit
+# output eDP-1 bg ~/Pictures/wallpapers/DlNfBzgUUAQY4V5-orig.jpg fit
+output eDP-1 bg ~/Pictures/wallpapers/1324126441.likihouse_ok.jpg fit
 
 # Mod4 is WinKey
 set $mod Mod4
