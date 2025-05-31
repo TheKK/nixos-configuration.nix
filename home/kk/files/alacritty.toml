@@ -1,0 +1,32 @@
+
+[cursor]
+style = "Block"
+vi_mode_style = "Underline"
+
+[font]
+size = 14.5
+
+[font.bold]
+family = "hermit"
+
+[font.bold_italic]
+family = "hermit"
+
+[font.italic]
+family = "hermit"
+
+[font.normal]
+family = "hermit"
+
+[selection]
+save_to_clipboard = true
+
+[terminal.shell]
+program = "/usr/bin/env"
+args = ["zsh"]
+
+[window]
+opacity = 0.85
+
+[general]
+live_config_reload = true
