@@ -37,6 +37,7 @@
       "steam-original"
       "steam-run"
       "steam-unwrapped"
+      "aseprite"
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -81,6 +82,7 @@
         fcitx5-gtk
 	libsForQt5.fcitx5-qt
 	fcitx5-rime
+	fcitx5-mozc
       ];
     };
   };

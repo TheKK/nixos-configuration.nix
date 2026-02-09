@@ -10,6 +10,12 @@ let
     ];
     haskellDev = with pkgs.nixpkgs-unstable; [ ];
     randomProgram = with pkgs; [
+      libinput
+      aseprite
+      krita
+      capitaine-cursors-themed
+      gnome-tweaks
+      vesktop
       dmidecode
       powertop
       nfs-utils
