@@ -9,7 +9,7 @@ let
 
       # Tools: ${pkgs.hyprshade}
       # Tools: ${pkgs.hyprpicker}
-      # Tools: ${pkgs.eww-wayland}
+      # Tools: ${pkgs.eww}
 
       exec-once=${pkgs.hyprpaper}/bin/hyprpaper
       

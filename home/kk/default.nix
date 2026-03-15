@@ -10,6 +10,8 @@ let
     ];
     haskellDev = with pkgs.nixpkgs-unstable; [ ];
     randomProgram = with pkgs; [
+      libwacom
+      piper
       libinput
       aseprite
       krita
@@ -32,7 +34,6 @@ let
       networkmanagerapplet
       openfortivpn
       zlib
-      nmap
       usbutils
       asciinema
       gnupg
@@ -54,7 +55,6 @@ let
       grim
       hdparm
       ncdu
-      nm-tray
       pavucontrol
       ranger
       ripgrep

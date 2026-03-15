@@ -8,7 +8,15 @@
     ./hardware-configuration.nix
   ];
 
-  hardware.bluetooth.powerOnBoot = false;
+  hardware.bluetooth = {
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Experimental = true;
+      };
+    };
+  };
+
 
   nix = {
     package = pkgs.nixVersions.stable;
@@ -39,6 +47,10 @@
       "steam-unwrapped"
       "aseprite"
     ];
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "broadcom-sta-6.30.223.271-59-6.12.69"
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -77,7 +89,9 @@
   i18n = {
     defaultLocale = "zh_TW.UTF-8";
     inputMethod = {
-      enabled = "fcitx5";
+      enable = true;
+      type = "fcitx5";
+      fcitx5.waylandFrontend = true;
       fcitx5.addons = with pkgs; [
         fcitx5-gtk
 	libsForQt5.fcitx5-qt
@@ -118,6 +132,16 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
 
+  services.udev = {
+    extraRules = ''
+      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="0711", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
+      ACTION=="add|change", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="d027", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
+      ACTION=="add|change", SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="030e", ATTR{name}=="Wacom Intuos S Pad", ENV{ID_INPUT_TABLET_PAD}="1"
+    '';
+  };
+
+  services.ratbagd.enable = true;
+
   xdg = {
     portal.enable = true;
   };
@@ -153,7 +177,10 @@
     # We need to enable shell here so that when user using them it will sourcing required files.
     zsh.enable = true;
 
-    vim.defaultEditor = true;
+    vim = {
+      enable = true;
+      defaultEditor = true;
+    };
     sway = {
       enable = true;
       wrapperFeatures.gtk = true; # so that gtk works properly
@@ -188,7 +215,7 @@
   fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk-sans
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     liberation_ttf
     fira-code
     fira-code-symbols
