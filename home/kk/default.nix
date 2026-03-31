@@ -4,87 +4,101 @@
 let
   fileDir = "${self}/home/kk/files";
 
-  packages = let
-    fonts = with pkgs; [ hermit font-awesome 
-      # nerd-fonts.ubuntu
+  packages =
+    let
+      fonts = with pkgs; [
+        hermit
+        font-awesome
+        # nerd-fonts.ubuntu
+      ];
+      haskellDev = with pkgs.nixpkgs-unstable; [ ];
+      randomProgram = with pkgs; [
+        libwacom
+        piper
+        libinput
+        aseprite
+        pkgs.nixpkgs-unstable.krita
+        capitaine-cursors-themed
+        gnome-tweaks
+        vesktop
+        dmidecode
+        powertop
+        nfs-utils
+        dnsutils
+        smartmontools
+        kdePackages.kdenlive
+        p7zip
+        cpufrequtils
+        iperf
+        tmux
+        cifs-utils
+        openssl
+        zip
+        networkmanagerapplet
+        openfortivpn
+        zlib
+        usbutils
+        asciinema
+        gnupg
+        binutils
+        graphviz
+        cachix
+        notify-desktop
+        htop
+        pstree
+        jq
+        file
+        steam-run
+        brightnessctl
+        curl
+        emacs
+        fd
+        feh
+        ffmpeg
+        grim
+        hdparm
+        ncdu
+        pavucontrol
+        ranger
+        ripgrep
+        slurp
+        tig
+        time
+        tree
+        wf-recorder
+        wget
+        xwayland
+        tokei
+      ];
+      nixProgram = with pkgs; [
+        nixpkgs-fmt
+        nix-tree
+        nix-du
+      ];
+      networkPrograms = with pkgs; [ mtr ];
+      archivePrograms = with pkgs; [
+        unzip
+        unar
+      ];
+      graphicalPrograms = with pkgs; [ gimp ];
+    in
+    builtins.concatLists [
+      fonts
+      randomProgram
+      nixProgram
+      networkPrograms
+      archivePrograms
+      haskellDev
+      graphicalPrograms
     ];
-    haskellDev = with pkgs.nixpkgs-unstable; [ ];
-    randomProgram = with pkgs; [
-      libwacom
-      piper
-      libinput
-      aseprite
-      pkgs.nixpkgs-unstable.krita
-      capitaine-cursors-themed
-      gnome-tweaks
-      vesktop
-      dmidecode
-      powertop
-      nfs-utils
-      dnsutils
-      smartmontools
-      kdePackages.kdenlive
-      p7zip
-      cpufrequtils
-      iperf
-      tmux
-      cifs-utils
-      openssl
-      zip
-      networkmanagerapplet
-      openfortivpn
-      zlib
-      usbutils
-      asciinema
-      gnupg
-      binutils
-      graphviz
-      cachix
-      notify-desktop
-      htop
-      pstree
-      jq
-      file
-      steam-run
-      brightnessctl
-      curl
-      emacs
-      fd
-      feh
-      ffmpeg
-      grim
-      hdparm
-      ncdu
-      pavucontrol
-      ranger
-      ripgrep
-      slurp
-      tig
-      time
-      tree
-      wf-recorder
-      wget
-      xwayland
-      tokei
-    ];
-    nixProgram = with pkgs; [ nixpkgs-fmt nix-tree nix-du ];
-    networkPrograms = with pkgs; [ mtr ];
-    archivePrograms = with pkgs; [ unzip unar ];
-    graphicalPrograms = with pkgs; [ gimp ];
-  in builtins.concatLists [
-    fonts
-    randomProgram
-    nixProgram
-    networkPrograms
-    archivePrograms
-    haskellDev
-    graphicalPrograms
-  ];
 
-in {
+in
+{
   imports =
-    let homeAttrs = { inherit fileDir; };
-    in [
+    let
+      homeAttrs = { inherit fileDir; };
+    in
+    [
       (import ./home/sway.nix homeAttrs)
       (import ./hyprland.nix)
     ];
@@ -114,8 +128,7 @@ in {
 
   wayland.windowManager.hyprland = {
     enable = true;
-    extraConfig = ''
-    '';
+    extraConfig = "";
   };
 
   programs.rofi = {
@@ -130,7 +143,9 @@ in {
 
   programs.zsh = {
     enable = true;
-    shellAliases = { gst = "${pkgs.git}/bin/git status"; };
+    shellAliases = {
+      gst = "${pkgs.git}/bin/git status";
+    };
     initContent = ''
       bindkey "^P" up-line-or-history;
       bindkey "^N" down-line-or-history;
@@ -156,7 +171,9 @@ in {
       user.email = "thumbd03803@gmail.com";
       aliases = {
       };
-      init = { defaultBranch = "main"; };
+      init = {
+        defaultBranch = "main";
+      };
       core = {
         editor = "${pkgs.neovim}/bin/nvim";
       };
@@ -170,7 +187,9 @@ in {
   programs.password-store = {
     enable = true;
     package = pkgs.pass-wayland.withExtensions (exts: [ exts.pass-otp ]);
-    settings = { PASSWORD_STORE_DIR = "$HOME/.password-store"; };
+    settings = {
+      PASSWORD_STORE_DIR = "$HOME/.password-store";
+    };
   };
   programs.mpv.enable = true;
 
@@ -201,7 +220,9 @@ in {
     pinentry.package = pkgs.pinentry-qt;
   };
 
-  services.syncthing = { enable = true; };
+  services.syncthing = {
+    enable = true;
+  };
 
   # home.file = { ".gitconfig" = { source = "${fileDir}/.gitconfig"; }; };
 }

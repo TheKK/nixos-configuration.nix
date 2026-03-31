@@ -3,7 +3,8 @@
 { config, pkgs, ... }:
 
 let
-in {
+in
+{
   imports = [ (import ./alacritty.nix homeAttrs) ];
 
   home.packages = with pkgs; [
@@ -16,5 +17,9 @@ in {
     wofi
   ];
 
-  xdg.configFile = { "sway" = { source = "${fileDir}/sway"; }; };
+  xdg.configFile = {
+    "sway" = {
+      source = "${fileDir}/sway";
+    };
+  };
 }

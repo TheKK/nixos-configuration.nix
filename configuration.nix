@@ -4,7 +4,8 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
 
@@ -16,7 +17,6 @@
       };
     };
   };
-
 
   nix = {
     package = pkgs.nixVersions.stable;
@@ -37,7 +37,8 @@
     };
   };
 
-  nixpkgs.config.allowUnfreePredicate = pkg:
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
     builtins.elem (pkgs.lib.getName pkg) [
       "broadcom-bt-firmware" # Bluetooth firmware.
       "broadcom-sta" # Wifi firmware.
@@ -94,9 +95,9 @@
       fcitx5.waylandFrontend = true;
       fcitx5.addons = with pkgs; [
         fcitx5-gtk
-	libsForQt5.fcitx5-qt
-	fcitx5-rime
-	fcitx5-mozc
+        libsForQt5.fcitx5-qt
+        fcitx5-rime
+        fcitx5-mozc
       ];
     };
   };
@@ -152,7 +153,11 @@
     kk = {
       description = "The programer";
       isNormalUser = true;
-      extraGroups = [ "wheel" "networkmanager" "docker" ];
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+        "docker"
+      ];
     };
   };
 
@@ -224,4 +229,3 @@
     proggyfonts
   ];
 }
-
