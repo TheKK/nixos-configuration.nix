@@ -110,11 +110,11 @@
 
   # Enable the GNOME 3 Desktop Environment.
   services.xserver.enable = true;
-  services.xserver.displayManager = {
+  services.displayManager = {
     gdm.enable = true;
     hiddenUsers = [ ];
   };
-  services.xserver.desktopManager.gnome.enable = true;
+  services.desktopManager.gnome.enable = true;
   services.gnome.gnome-remote-desktop.enable = true;
 
   # services.gvfs.enable = true;
@@ -124,13 +124,13 @@
   # hardware.pulseaudio.support32Bit = true;
 
   # Enable graphical stuff
-  hardware.opengl.enable = true;
-  hardware.opengl.extraPackages = with pkgs; [ intel-media-driver ];
-  hardware.opengl.driSupport32Bit = true;
-  hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ ];
+  hardware.graphics.enable = true;
+  hardware.graphics.extraPackages = with pkgs; [ intel-media-driver ];
+  hardware.graphics.enable32Bit = true;
+  hardware.graphics.extraPackages32 = with pkgs.pkgsi686Linux; [ ];
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
 
   services.udev = {
     extraRules = ''

@@ -14,7 +14,7 @@ let
       piper
       libinput
       aseprite
-      krita
+      pkgs.nixpkgs-unstable.krita
       capitaine-cursors-themed
       gnome-tweaks
       vesktop
@@ -131,7 +131,7 @@ in {
   programs.zsh = {
     enable = true;
     shellAliases = { gst = "${pkgs.git}/bin/git status"; };
-    initExtra = ''
+    initContent = ''
       bindkey "^P" up-line-or-history;
       bindkey "^N" down-line-or-history;
     '';
@@ -151,22 +151,22 @@ in {
   programs.chromium.enable = true;
   programs.git = {
     enable = true;
-    userName = "Ying-Ruei Liang (TheKK)";
-    userEmail = "thumbd03803@gmail.com";
-    signing = {
-      key = "97D5962071B77357B4E4C45DB37E75CC529BF418";
-      signByDefault = true;
-    };
-    aliases = {
-    };
-    extraConfig = {
+    settings = {
+      user.name = "Ying-Ruei Liang (TheKK)";
+      user.email = "thumbd03803@gmail.com";
+      aliases = {
+      };
       init = { defaultBranch = "main"; };
       core = {
         editor = "${pkgs.neovim}/bin/nvim";
       };
     };
-    delta = { enable = true; };
+    signing = {
+      key = "97D5962071B77357B4E4C45DB37E75CC529BF418";
+      signByDefault = true;
+    };
   };
+  programs.delta.enable = true;
   programs.password-store = {
     enable = true;
     package = pkgs.pass-wayland.withExtensions (exts: [ exts.pass-otp ]);
@@ -176,7 +176,9 @@ in {
 
   services.mako = {
     enable = true;
-    defaultTimeout = 1500;
+    settings = {
+      default-timeout = 1500;
+    };
   };
 
   programs.direnv = {
@@ -196,7 +198,7 @@ in {
   services.gpg-agent = {
     enable = true;
     defaultCacheTtl = 150;
-    pinentryPackage = pkgs.pinentry-qt;
+    pinentry.package = pkgs.pinentry-qt;
   };
 
   services.syncthing = { enable = true; };
