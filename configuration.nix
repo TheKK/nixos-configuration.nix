@@ -7,14 +7,23 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./configuration/udev.nix
   ];
 
-  hardware.bluetooth = {
-    powerOnBoot = true;
-    settings = {
-      General = {
-        Experimental = true;
+  hardware = {
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+      settings = {
+        General = {
+          Experimental = true;
+        };
       };
+    };
+
+    uinput.enable = true;
+    opentabletdriver = {
+      enable = true;
     };
   };
 
@@ -29,7 +38,7 @@
       max-jobs = 2;
       cores = 2;
       substituters = [
-        "https://nixcache.reflex-frp.org"
+        # "https://nixcache.reflex-frp.org"
       ];
       trusted-public-keys = [
         "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI="
@@ -51,6 +60,10 @@
 
   nixpkgs.config.permittedInsecurePackages = [
     "broadcom-sta-6.30.223.271-59-6.12.69"
+    "broadcom-sta-6.30.223.271-59-6.12.87"
+    "broadcom-sta-6.30.223.271-59-6.12.90"
+    "broadcom-sta-6.30.223.271-59-6.12.92"
+    "broadcom-sta-6.30.223.271-59-6.18.37"
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -77,6 +90,7 @@
   systemd.services.NetworkManager-wait-online.enable = false;
 
   networking.hostName = "kks-nixos"; # Define your hostname.
+  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "Asia/Taipei";
@@ -113,12 +127,22 @@
   services.xserver.enable = true;
   services.displayManager = {
     gdm.enable = true;
+    sddm = {
+      enable = false;
+      wayland.enable = true;
+    };
     hiddenUsers = [ ];
   };
   services.desktopManager.gnome.enable = true;
-  services.gnome.gnome-remote-desktop.enable = true;
 
-  # services.gvfs.enable = true;
+  services.desktopManager.plasma6.enable = false;
+
+  services.gvfs.enable = true;
+
+  services = {
+    # tuned.enable = true;
+    upower.enable = true;
+  };
 
   # Enable sound.
   # hardware.pulseaudio.enable = true;
@@ -133,15 +157,7 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
-  services.udev = {
-    extraRules = ''
-      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="0711", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
-      ACTION=="add|change", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="d027", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
-      ACTION=="add|change", SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="030e", ATTR{name}=="Wacom Intuos S Pad", ENV{ID_INPUT_TABLET_PAD}="1"
-    '';
-  };
-
-  services.ratbagd.enable = true;
+  services.ratbagd.enable = false;
 
   xdg = {
     portal.enable = true;
@@ -166,9 +182,22 @@
   environment.systemPackages = with pkgs; [
     vim
     firefox
-    vulkan-tools
-    vulkan-loader
+
+    #niri
+    xwayland-satellite
+    swaylock
+    waybar
+    fuzzel
+    swaybg
   ];
+
+  environment.etc."libinput/local-overrides.quirks" = {
+    text = ''
+      [OpenTabletDriver Virtual Tablet]
+      MatchName=OpenTabletDriver*
+      AttrTabletSmoothing=0
+    '';
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -178,6 +207,9 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "20.09"; # Did you read the comment?
 
+  # Niri
+  programs.niri.enable = true;
+
   programs = {
     # We need to enable shell here so that when user using them it will sourcing required files.
     zsh.enable = true;
@@ -186,8 +218,9 @@
       enable = true;
       defaultEditor = true;
     };
+
     sway = {
-      enable = true;
+      enable = false;
       wrapperFeatures.gtk = true; # so that gtk works properly
       extraPackages = with pkgs; [
         swaylock
@@ -213,7 +246,7 @@
   };
 
   virtualisation.docker = {
-    enable = true;
+    enable = false;
     enableOnBoot = false;
   };
 
@@ -228,4 +261,9 @@
     dina-font
     proggyfonts
   ];
+
+  nix.settings = {
+    extra-substituters = [ "https://noctalia.cachix.org" ];
+    extra-trusted-public-keys = [ "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4=" ];
+  };
 }

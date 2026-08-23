@@ -13,20 +13,21 @@ let
       ];
       haskellDev = with pkgs.nixpkgs-unstable; [ ];
       randomProgram = with pkgs; [
+        alacritty
+        nautilus
         libwacom
         piper
         libinput
-        aseprite
-        pkgs.nixpkgs-unstable.krita
+        # aseprite
+        krita
         capitaine-cursors-themed
         gnome-tweaks
-        vesktop
         dmidecode
         powertop
         nfs-utils
         dnsutils
         smartmontools
-        kdePackages.kdenlive
+        # kdePackages.kdenlive
         p7zip
         cpufrequtils
         iperf
@@ -99,8 +100,8 @@ in
       homeAttrs = { inherit fileDir; };
     in
     [
-      (import ./home/sway.nix homeAttrs)
-      (import ./hyprland.nix)
+      # (import ./home/sway.nix homeAttrs)
+      # (import ./hyprland.nix)
     ];
 
   manual.html.enable = true;
@@ -127,7 +128,7 @@ in
   home.packages = packages;
 
   wayland.windowManager.hyprland = {
-    enable = true;
+    enable = false;
     extraConfig = "";
   };
 
@@ -162,7 +163,10 @@ in
     };
   };
 
-  programs.firefox.enable = true;
+  programs.firefox = {
+    enable = true;
+    configPath = ".mozilla/firefox";
+  };
   programs.chromium.enable = true;
   programs.git = {
     enable = true;
@@ -212,6 +216,8 @@ in
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
+    withRuby = true;
+    withPython3 = true;
   };
 
   services.gpg-agent = {
