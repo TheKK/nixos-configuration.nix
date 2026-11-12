@@ -13,7 +13,7 @@ let
       ];
       haskellDev = with pkgs.nixpkgs-unstable; [ ];
       randomProgram = with pkgs; [
-        alacritty
+        wl-clipboard
         nautilus
         libwacom
         piper
@@ -102,6 +102,7 @@ in
     [
       # (import ./home/sway.nix homeAttrs)
       # (import ./hyprland.nix)
+      (import ./home/alacritty.nix homeAttrs)
     ];
 
   manual.html.enable = true;

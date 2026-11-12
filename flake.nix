@@ -18,6 +18,7 @@
     }:
     {
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-tree;
+      legacyPackages.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux;
 
       # replace 'joes-desktop' with your hostname here.
       nixosConfigurations.kks-nixos = nixpkgs.lib.nixosSystem rec {
@@ -29,9 +30,10 @@
               nixpkgs.overlays = [
                 (final: prev: {
                   nixpkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
-    		  noctalia = inputs.noctalia.packages.${system}.default;
+                  noctalia = inputs.noctalia.packages.${system}.default;
+                  krita = final.nixpkgs-unstable.krita;
                 })
-		(import ./overlays/krita.nix)
+                (import ./overlays/krita.nix)
               ];
             }
           )
@@ -51,7 +53,9 @@
       };
       nixConfig = {
         extra-substituters = [ "https://noctalia.cachix.org" ];
-        extra-trusted-public-keys = [ "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4=" ];
+        extra-trusted-public-keys = [
+          "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+        ];
       };
     };
 }
